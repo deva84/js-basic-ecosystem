@@ -1,3 +1,3 @@
-# js-basic-ecosystem
+# Node.js Essential Training Home Task
 
-JS Basic Ecosystem repo dedicated to homework storing
+This repository contains tests for the Node.js Essential Training home task. 
