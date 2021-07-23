@@ -3,5 +3,12 @@
  * @param promises
  */
 module.exports = function (promises) {
-  // TODO: Implement;
+    return new Promise((resolve, reject) => {
+        promises
+            .forEach(promise => {
+                promise
+                    .then(result => resolve(result))
+                    .catch(error => reject(error))
+            });
+    });
 }
