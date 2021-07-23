@@ -1,3 +1,3 @@
-# js-basic-ecosystem
+# Node.js Advanced. Home Task
 
-JS Basic Ecosystem repo dedicated to homework storing
+This repository contains home task for Node.js Advanced cource.
