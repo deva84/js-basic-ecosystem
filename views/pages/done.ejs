@@ -1,0 +1,12 @@
+<h2> Done List </h2>
+
+<% if (!doneTasks) { %>
+
+  <h3 class="no-tasks">There are no tasks.</h3>
+
+<% } else { %>
+
+<%- include("./partials/taskList", doneTasks, tasksTodo=null)%>
+
+<% } %>
+

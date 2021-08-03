@@ -1,3 +1,2 @@
-# js-basic-ecosystem
+# Building a website with Node.js and Express
 
-JS Basic Ecosystem repo dedicated to homework storing
