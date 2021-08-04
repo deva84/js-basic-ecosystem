@@ -14,7 +14,7 @@ module.exports = params => {
                 doneTasks
             });
         } catch (err) {
-            return next(new Error('Error!'));
+            return next(new Error('Error!', err.message));
         }
     });
 

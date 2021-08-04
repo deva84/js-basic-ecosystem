@@ -1,7 +1,8 @@
-const { readFile, writeFile } = require("fs");
-const { promisify } = require("util");
+const { readFile, writeFile } = require('fs');
+const { promisify } = require('util');
 
 const readDataFile = promisify(readFile);
+const writeDataFile = promisify(writeFile);
 
 class TaskService {
 
@@ -23,8 +24,17 @@ class TaskService {
 
     async addEntry(name, id) {
         const data = JSON.parse(await readDataFile(this.dataFile, 'utf-8'));
-        data.unshift({ name, id });
-        return writeFile(this.dataFile, JSON.stringify(data));
+        data.tasks.unshift({ id, name });
+        return writeDataFile(this.dataFile, JSON.stringify(data));
+    }
+
+    async deleteEntry(name) {
+        const data = JSON.parse(await readDataFile(this.dataFile, 'utf-8'));
+        const index = data.tasks.findIndex(task => task.name === name);
+        if (index > -1) {
+            data.tasks.splice(index, 1);
+        }
+        return writeDataFile(this.dataFile, JSON.stringify(data));
     }
 }
 

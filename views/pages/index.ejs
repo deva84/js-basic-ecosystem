@@ -4,11 +4,12 @@
     <button class="task-form__button button" type="submit">Create</button>
   </form>
 
-  <% if (locals.errors) { %>
+  <% if (locals.error) { %>
     <div class="alert alert--error">
-      Invalid task!
+      <%= error %>
     </div>
-  <% } else if (locals.message) { %>
+
+  <% } else if (locals.success) { %>
     <div class="alert alert--success">
       Task was added!
     </div>
