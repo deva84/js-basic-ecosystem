@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "email": "test@test.com",
+      "password": "$2b$10$VGHt0eMroWjl.wU3viyLkOINv/M.C/On7lgrkXLJgDODti.dmufHa",
+      "tasks": [
+        {
+          "title": "Title4",
+          "description": "new description",
+          "done": true
+        },
+        {
+          "title": "Title2",
+          "description": "description2",
+          "done": false
+        },
+        {
+          "title": "Title3",
+          "description": "description3",
+          "done": true
+        }
+      ]
+    }
+  ]
+}
