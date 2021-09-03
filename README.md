@@ -1,3 +1,2 @@
-# js-basic-ecosystem
+# Node.js and SQL
 
-JS Basic Ecosystem repo dedicated to homework storing
