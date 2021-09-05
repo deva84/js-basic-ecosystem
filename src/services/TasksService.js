@@ -1,6 +1,6 @@
-require('dotenv').config();
-
-const {userModel} = require('../models/models');
+const bcrypt = require("bcrypt");
+const User = require('./UsersService').User;
+const Task = require('./UsersService').Task;
 
 class TasksService {
 
@@ -9,55 +9,90 @@ class TasksService {
     }
 
     async getTodoTasks() {
-        const taskList = await userModel.find({
-                'email': this.email
-            });
-        if(!taskList[0]) return [];
-        return taskList[0].tasks.filter(task => task.done === false);
+        const user = await User.findOne({
+            where: {email: this.email}
+        });
+        const tasks = await Task.findAll({
+            where: {userId: user.id}
+        });
+        if (!tasks) return [];
+        return tasks.filter(task => task.done === false);
     };
 
     async getCompletedTasks() {
-        const taskList = await userModel.find({
-            'email': this.email
+        const user = await User.findOne({
+            where: {email: this.email}
         });
-        if(!taskList[0]) return [];
-        return taskList[0].tasks.filter(task => task.done === true);
+        const tasks = await Task.findAll({
+            where: {userId: user.id}
+        });
+        if (!tasks) return [];
+        return tasks.filter(task => task.done === true);
     }
 
     async addNewTask(title, description) {
-        const isDuplicate = await userModel.findOne({'email': this.email, 'tasks.title': title})
+        const user = await User.findOne({
+            where: {email: this.email}
+        });
+        const isDuplicate = await Task.findOne({
+            where: {userId: user.id, title: title}
+        });
         if (isDuplicate) return false;
-        await userModel.updateOne({'email': this.email}, {$push: {'tasks': {title, description}}})
+        try {
+            await Task.create({
+                title: title,
+                description: description,
+                userId: user.id
+            });
+        } catch (err) {
+            throw new Error(err);
+        }
         return {title, done: false, description};
     }
 
     async markTaskAsCompleted(title) {
-        const exist = await userModel.findOne({'email': this.email, 'tasks.title': title});
+        const user = await User.findOne({
+            where: {email: this.email}
+        });
+        const exist = await Task.findOne({
+            where: {userId: user.id, title: title}
+        });
         if (!exist) return false;
-        await userModel.updateOne({
-            'email': this.email,
-            'tasks.title': title
-        }, {$set: {'tasks.$.done': true}});
+        await Task.update({
+            done: true
+        }, {where: {title: title}});
         return true;
     }
 
     async updateTaskContent(oldTitle, newTitle, description) {
-        const isDuplicate = await userModel.findOne({'email': this.email, 'tasks.title': newTitle})
+        const user = await User.findOne({
+            where: {email: this.email}
+        });
+        const isDuplicate = await Task.findOne({
+            where: {userId: user.id, title: newTitle}
+        });
         if (isDuplicate) return false;
         const decodedTitle = decodeURI(oldTitle);
-        const exist = await userModel.findOne({'email': this.email, 'tasks.title': decodedTitle});
+        const exist = await Task.findOne({
+            where: {userId: user.id, title: decodedTitle}
+        });
         if (!exist) return 'undefined';
-        await userModel.updateOne({
-            'email': this.email,
-            'tasks.title': decodedTitle
-        }, {$set: {'tasks.$.title': newTitle, 'tasks.$.description': description}});
+        await Task.update({
+            title: newTitle,
+            description: description
+        }, {where: {title: title}});
         return true;
     }
 
     async deleteTask(title) {
-        const exist = await userModel.findOne({'email': this.email, 'tasks.title': title});
+        const user = await User.findOne({
+            where: {email: this.email}
+        });
+        const exist = await Task.findOne({
+            where: {userId: user.id, title: title}
+        });
         if (!exist) return true;
-        await userModel.updateOne({'email': this.email}, {$pull: {'tasks': {'title': title}}});
+        await Task.destroy({where: {userId: user.id, title: title}});
         return true;
     }
 }

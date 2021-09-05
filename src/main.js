@@ -2,9 +2,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const makeStoppable = require("stoppable")
 const http = require("http");
-const Sequelize = require("sequelize");
 
 const config = require('../src/config');
+const sequelize = require('./connection').sequelize;
 
 const authRouter = require('./routes/auth');
 const tasksRouter = require('./routes/tasks');
@@ -18,7 +18,6 @@ app.use('/api/tasks', tasksRouter);
 const server = makeStoppable(http.createServer(app));
 
 function connectToMySql() {
-    const sequelize = new Sequelize(config.options);
     sequelize
         .authenticate()
         .then(() => console.info('Successfully connected to MySql'))
