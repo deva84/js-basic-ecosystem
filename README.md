@@ -1,3 +1,2 @@
-# js-basic-ecosystem
+# GraphQL
 
-JS Basic Ecosystem repo dedicated to homework storing
