@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "str": "webpack serve --open --config webpack.dev.js",
-    "bld": "webpack --config webpack.prod.js",
+    "dev": "webpack serve --open --config webpack.dev.js",
+    "prod": "webpack --config webpack.prod.js",
     "start": "npm run build",
     "prebuild": "rimraf dist",
     "build": "npm-run-all -p build:*",
