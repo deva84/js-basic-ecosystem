@@ -1,0 +1,16 @@
+{
+  "name": "eslint-homework",
+  "version": "1.0.0",
+  "description": "homework for practising eslint and husky",
+  "main": "bad-code.js",
+  "scripts": {
+    "prepare": "husky install",
+    "lint": "npx eslint bad-code.js"
+  },
+  "author": "Svitlana Dasgupta",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "husky": "^7.0.2"
+  }
+}
