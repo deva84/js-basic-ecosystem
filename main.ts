@@ -1,7 +1,7 @@
 interface IGame {}
 
 export class Game implements IGame{
-  private players: number;
+  players: number;
 
   constructor(number: number) {
     this.players = number;
