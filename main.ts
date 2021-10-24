@@ -3,10 +3,10 @@ interface IGame {
 }
 
 export class Game implements IGame{
-  players: number;
+  numberOfPlayers: number;
 
   constructor(number: number) {
-    this.players = number;
+    this.numberOfPlayers = number;
   }
 
   throw(): void {}
