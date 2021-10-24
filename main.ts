@@ -1,4 +1,6 @@
-interface IGame {}
+interface IGame {
+  throw(): void
+}
 
 export class Game implements IGame{
   players: number;
@@ -6,4 +8,6 @@ export class Game implements IGame{
   constructor(number: number) {
     this.players = number;
   }
+
+  throw(): void {}
 }
