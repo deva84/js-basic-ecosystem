@@ -1,0 +1,22 @@
+{
+  "name": "HW_done_12",
+  "version": "1.0.0",
+  "description": "Dart 301 game written using TDD",
+  "main": "main.ts",
+  "scripts": {
+    "test:unit": "jest",
+    "compile": "tsc"
+  },
+  "keywords": [],
+  "author": "Svitlana Dasgupta",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "@babel/plugin-proposal-class-properties": "^7.14.5",
+    "@babel/plugin-transform-modules-commonjs": "^7.15.4",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-typescript": "^7.15.0",
+    "babel-jest": "^27.3.1",
+    "jest": "^27.3.1"
+  }
+}
