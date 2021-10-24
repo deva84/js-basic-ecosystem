@@ -1,7 +1,7 @@
 interface IGame {
   throw(sector: number, mult: EMult, index: number): this | never;
-  getPlayers(): IPlayer[];
   instantiateGame(num: number): IPlayer[];
+  score(index: number): number;
 }
 
 enum EMult {
@@ -32,15 +32,16 @@ export class Game implements IGame{
     return this;
   }
 
-  getPlayers(): IPlayer[] {
-    return this.players;
-  }
-
   instantiateGame(num: number): IPlayer[] {
     let listOfPlayers = [];
     for (let i = 0; i < num; i++) {
       listOfPlayers.push({index: i, score: this.initialScore});
     }
     return listOfPlayers;
+  }
+
+  score(index: number): number {
+    const player = this.players.find(p => p.index === index);
+    return player.score;
   }
 }
