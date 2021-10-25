@@ -1,4 +1,4 @@
-import { Game } from './main'
+import {Game} from './main'
 
 describe('Darts 301', () => {
   let game;
@@ -18,10 +18,17 @@ describe('Darts 301', () => {
     expect(game.players[0].score).toEqual(271);
   });
 
-  it('should check if method score exists', () => {
-    expect(game.score).toBeDefined();
-  })
+  it('should throw error when non-existing player index or invalid multiplier is passed', () => {
+    expect(() => game.score(27)).toThrow();
+    expect(() => game.throw(7, 1, 27)).toThrow();
+    expect(() => game.throw(10, 4, 0)).toThrow();
+  });
 
-
+  it('should return correct score results for each player', () => {
+    game
+      .throw(8, 2, 0).throw(2, 1, 0).throw(15, 3, 0).throw(1, 3, 1).throw(20, 2, 1).throw(14, 3, 1);
+    expect(game.score(0)).toEqual(238);
+    expect(game.score(1)).toEqual(216);
+  });
 
 });
