@@ -1,3 +1,11 @@
-# js-basic-ecosystem
+# About project
+String Eraser is a simple function for removing substring from a string
 
-JS Basic Ecosystem repo dedicated to homework storing
+## How to use
+Run "compile" script. Import stringEraser anywhere in your project and start using it.
+
+## Remove compiled files
+Run "clean" script
+
+## Tests
+Run "test:unit" script

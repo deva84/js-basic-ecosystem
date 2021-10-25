@@ -1,0 +1,22 @@
+{
+  "name": "jsmp-infra-dasgupta-svitlana-string-eraser",
+  "version": "1.0.1",
+  "description": "package created for educational purpose of the author",
+  "main": "index.js",
+  "scripts": {
+    "clean": "node src/clean.js",
+    "compile": "tsc",
+    "test:unit": "npm run compile && mocha test",
+  },
+  "keywords": [
+    "substring",
+    "string"
+  ],
+  "author": "Svitlana Dasgupta",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "mocha": "^9.1.2",
+    "typescript": "^4.4.3"
+  }
+}
