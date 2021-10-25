@@ -30,5 +30,4 @@ describe('Darts 301', () => {
     expect(game.score(0)).toEqual(238);
     expect(game.score(1)).toEqual(216);
   });
-
 });

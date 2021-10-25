@@ -15,10 +15,11 @@ interface IPlayer {
   score: number;
 }
 
-export class Game implements IGame{
+export class Game implements IGame {
   public numberOfPlayers: number;
   public initialScore = 301;
   protected players: IPlayer[];
+  protected winner: number | undefined;
 
   constructor(number: number) {
     this.numberOfPlayers = number;
@@ -26,9 +27,11 @@ export class Game implements IGame{
   }
 
   throw(sector: number, mult: EMult, index: number): this | never {
+    if (!Object.values(EMult).includes(mult) || this.numberOfPlayers <= index) {
+      throw new Error('Invalid parameter!')
+    }
     const player = this.players.find(p => p.index === index);
     player.score = player.score - sector * mult;
-
     return this;
   }
 
@@ -41,6 +44,9 @@ export class Game implements IGame{
   }
 
   score(index: number): number {
+    if (this.numberOfPlayers <= index) {
+      throw new Error('Invalid parameter!')
+    }
     const player = this.players.find(p => p.index === index);
     return player.score;
   }
