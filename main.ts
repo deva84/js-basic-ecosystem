@@ -19,7 +19,7 @@ export class Game implements IGame {
   public numberOfPlayers: number;
   public initialScore = 301;
   protected players: IPlayer[];
-  protected winner: number | undefined;
+  winner: number | undefined;
 
   constructor(number: number) {
     this.numberOfPlayers = number;
@@ -27,11 +27,18 @@ export class Game implements IGame {
   }
 
   throw(sector: number, mult: EMult, index: number): this | never {
+    if (this.winner) throw new Error('Winner is already defined! No throws are allowed');
     if (!Object.values(EMult).includes(mult) || this.numberOfPlayers <= index) {
       throw new Error('Invalid parameter!')
     }
     const player = this.players.find(p => p.index === index);
+    if (sector * mult > player.score) {
+      return this;
+    }
     player.score = player.score - sector * mult;
+    if (player.score === 0) {
+      this.winner = player.index;
+    }
     return this;
   }
 
